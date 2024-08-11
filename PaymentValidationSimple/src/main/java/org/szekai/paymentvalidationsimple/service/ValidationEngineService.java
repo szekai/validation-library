@@ -23,4 +23,10 @@ public class ValidationEngineService {
             rule.validate(transaction);
         }
     }
+
+    public void validateTransactionReact(Transaction transaction) throws ValidationException {
+        for (ValidationRule rule : validationRules) {
+            rule.validate(transaction);
+        }
+    }
 }

@@ -1,0 +1,21 @@
+# rules-config.yaml
+rules-config:
+  rules:
+    typeA:
+      - CheckTTTypeRule
+      - ValidateCurrencyRule
+      - VerifyCurrencyCutoffTimeRule
+      - VerifySwiftCurrencyRule
+      - VerifyOrAssignReimbursingBankRule
+      - VerifyNostroAgentForTTToMyanmarRule
+      - AssignNostroAgentForSpecialConditionRule
+      - ValidateValueDateRule
+      - ValidateSwiftBICForTag53Rule
+      - CalcPercentageAllocatedForNonGourShaRule
+      - CalcPercentageAllocatedForGourRule
+    typeB:
+      - CheckTTTypeRule
+      - ValidateCurrencyRule
+      - VerifyCurrencyCutoffTimeRule
+      - VerifySwiftCurrencyRule
+      - VerifyOrAssignReimbursingBankRule
