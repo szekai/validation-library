@@ -1,14 +1,15 @@
 package org.szekai.paymentvalidationsimple.controller;
 
+import com.szekai.valiflexspringbootstarter.config.RulesProperties;
+import com.szekai.valiflexspringbootstarter.exception.ValidationException;
+import com.szekai.valiflexspringbootstarter.service.ValidationEngineService;
+import com.szekai.valiflexspringbootstarter.service.ValidationResult;
+import com.szekai.valiflexspringbootstarter.service.rules.ValidationRule;
+import com.szekai.valiflexspringbootstarter.vo.Transaction;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.szekai.paymentvalidationsimple.config.RulesConfig;
-import org.szekai.paymentvalidationsimple.exception.ValidationException;
-import org.szekai.paymentvalidationsimple.model.Transaction;
-import org.szekai.paymentvalidationsimple.service.ValidationEngineService;
-import org.szekai.paymentvalidationsimple.service.ValidationResult;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class ValidationController {
     private ValidationEngineService validationEngineService;
 
     @Autowired
-    private RulesConfig rulesConfig;
+    private RulesProperties rulesConfig;
+
 
     @PostMapping("/normal")
     public ResponseEntity<ValidationResult> validateTransaction(@RequestBody Transaction transaction,
@@ -53,6 +55,6 @@ public class ValidationController {
 
     @GetMapping("/rules")
     public Map<String, List<String>> getRules() {
-        return rulesConfig.getTypes();
+        return rulesConfig.types();
     }
 }

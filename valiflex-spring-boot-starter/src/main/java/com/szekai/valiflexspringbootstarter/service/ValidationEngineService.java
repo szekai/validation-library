@@ -1,12 +1,13 @@
-package org.szekai.paymentvalidationsimple.service;
+package com.szekai.valiflexspringbootstarter.service;
 
+import com.szekai.valiflexspringbootstarter.config.RulesProperties;
+import com.szekai.valiflexspringbootstarter.exception.ValidationException;
+import com.szekai.valiflexspringbootstarter.service.rules.ValidationRule;
+import com.szekai.valiflexspringbootstarter.vo.Transaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.szekai.paymentvalidationsimple.config.RulesConfig;
-import org.szekai.paymentvalidationsimple.exception.ValidationException;
-import org.szekai.paymentvalidationsimple.model.Transaction;
-import org.szekai.paymentvalidationsimple.service.rules.ValidationRule;
+
 
 import java.util.List;
 import java.util.Map;
@@ -17,16 +18,16 @@ import java.util.stream.Collectors;
 public class ValidationEngineService {
 
     private final Map<String, ValidationRule> validationRuleMap;
-    private final RulesConfig rulesConfig;
+    private final RulesProperties rulesConfig;
 
     @Autowired
-    public ValidationEngineService(Map<String, ValidationRule> validationRuleMap, RulesConfig rulesConfig) {
+    public ValidationEngineService(Map<String, ValidationRule> validationRuleMap, RulesProperties rulesConfig) {
         this.validationRuleMap = validationRuleMap;
         this.rulesConfig = rulesConfig;
     }
 
     public ValidationResult validateTransaction(Transaction transaction, boolean parallel) throws ValidationException {
-        List<String> ruleNames = rulesConfig.getTypes().get(transaction.getTtType());
+        List<String> ruleNames = rulesConfig.types().get(transaction.getTtType());
         if (ruleNames == null) {
             throw new ValidationException("Unknown TT type: " + transaction.getTtType());
         }

@@ -1,0 +1,3 @@
+spring.application.name: PaymentValidationSimple
+
+spring.config.import: rules-config.yml
